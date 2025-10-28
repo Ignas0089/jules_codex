@@ -193,3 +193,32 @@ Please feel free to:
 ---
 
 Happy AI-assisted developing!
+
+---
+
+## Išlaidų sekimo aplikacija
+
+Repozitorijoje palaikomos dvi vartotojo sąsajos: žiniatinklio aplikacija (`/web`) ir vietinė Android aplikacija (`/android`). Abi jos naudoja tą pačią logiką: išlaidos kaupiamos lokaliai, jos gali būti filtruojamos pagal mėnesį arba metus, o esant ryšiui, įkeliami CSV, PDF ir Excel failai automatiškai išanalizuojami OpenAI API.
+
+### Bendros galimybės
+
+- Įrašų kūrimas offline režimu (naršyklėje duomenys saugomi `localStorage`, telefone – Room duomenų bazėje).
+- Mėnesio ir metinė statistika bei vizualizacijos.
+- API raktas laikomas tik lokaliai ir juo nesidalijama.
+- Failai, įkelti būnant offline, išsaugomi eilėje ir apdorojami prisijungus (naršyklėje iki 5 MB vienam failui).
+
+### Android (APK) aplikacija
+
+* Naudojamas „Jetpack Compose“, Room ir DataStore – aplikacija veikia be interneto.
+* Įdiekite projektą į Android Studio (`File > Open…` → `android/`) ir sugeneruokite APK (`Build > Make Project`, tada `Build > Build Bundle(s) / APK(s) > Build APK(s)`).
+* Prisijungus prie interneto, failai siunčiami į OpenAI `files` ir `responses` API; gautos įžvalgos išsaugomos aplikacijoje.
+* Minimalus palaikomas Android API lygis – 24 (Android 7.0).
+
+### Žiniatinklio aplikacija
+
+* Atverkite `web/index.html` naršyklėje (rekomenduojamas statinis serveris, pvz., `npx serve web`).
+* API raktas, analizės istorija ir laukiančių failų eilė saugomi `localStorage`.
+* Dėl CORS apribojimų, siųsdami užklausas į `https://api.openai.com` galite naudoti reverse proxy arba vietinį backendą, kuris perduos užklausas OpenAI.
+* Analizės rezultatai pateikiami istorijos sąraše; offline metu įkelti failai apdorojami prisijungus.
+
+Abi versijos turi vienodus duomenų agregavimo algoritmus ir OpenAI integraciją, todėl galite rinktis patogiausią aplinką be funkcionalumo praradimo.

@@ -1,0 +1,331 @@
+:root {
+  color-scheme: light dark;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f5f6fa;
+  color: #1d1f2f;
+  --card-bg: #ffffffcc;
+  --border-color: #d9dcec;
+  --primary: #4463ff;
+  --primary-dark: #2740cc;
+  --muted: #6e738b;
+  --shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+  --success: #13a37b;
+  --warning: #f59e0b;
+  --error: #dc2626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #f0f4ff 0%, #f5f6fa 60%, #eef1ff 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  text-align: center;
+  padding: 3rem 1.5rem 2rem;
+  background: linear-gradient(135deg, rgba(68, 99, 255, 0.9), rgba(137, 173, 255, 0.85));
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.04em;
+}
+
+.app-header p {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.layout {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem clamp(1rem, 5vw, 4rem) 4rem;
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+input,
+select,
+button {
+  font: inherit;
+}
+
+input,
+select {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(68, 99, 255, 0.15);
+}
+
+button {
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+}
+
+button.primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  font-weight: 600;
+}
+
+button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(68, 99, 255, 0.25);
+}
+
+button.secondary {
+  background: rgba(68, 99, 255, 0.1);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+button.secondary:hover {
+  background: rgba(68, 99, 255, 0.18);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.status-indicator {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.status-indicator[data-state="online"] {
+  color: var(--success);
+}
+
+.status-indicator[data-state="offline"] {
+  color: var(--warning);
+}
+
+.analysis-messages {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.analysis-status {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: rgba(68, 99, 255, 0.08);
+  border: 1px solid rgba(68, 99, 255, 0.15);
+  font-size: 0.95rem;
+}
+
+.analysis-status[data-state="success"] {
+  background: rgba(19, 163, 123, 0.1);
+  border-color: rgba(19, 163, 123, 0.2);
+}
+
+.analysis-status[data-state="error"] {
+  background: rgba(220, 38, 38, 0.08);
+  border-color: rgba(220, 38, 38, 0.2);
+}
+
+.analysis-status[data-state="warning"] {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.analysis-history ul,
+.analysis-history li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.analysis-history li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(217, 220, 236, 0.4);
+}
+
+.analysis-history li:last-child {
+  border-bottom: none;
+}
+
+.analysis-history p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expenses-table th,
+.expenses-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(217, 220, 236, 0.5);
+}
+
+.expenses-table tbody tr:hover {
+  background-color: rgba(68, 99, 255, 0.06);
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 1.5rem 0;
+}
+
+.numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.chart-tabs {
+  display: inline-flex;
+  background: rgba(68, 99, 255, 0.1);
+  padding: 0.35rem;
+  border-radius: 999px;
+}
+
+.chart-tab {
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.chart-tab.active {
+  background: #fff;
+  color: var(--primary-dark);
+  box-shadow: 0 4px 12px rgba(68, 99, 255, 0.2);
+}
+
+.app-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  color: var(--muted);
+}
+
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  background: rgba(29, 31, 47, 0.95);
+  color: #fff;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 1000;
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-success {
+  background: rgba(19, 163, 123, 0.95);
+}
+
+.toast-error {
+  background: rgba(220, 38, 38, 0.95);
+}
+
+.toast-warning {
+  background: rgba(245, 158, 11, 0.95);
+}
+
+.toast-info {
+  background: rgba(68, 99, 255, 0.95);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .integration-card,
+  .analysis-card {
+    grid-column: span 2;
+  }
+}
